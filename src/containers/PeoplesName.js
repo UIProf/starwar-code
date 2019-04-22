@@ -7,7 +7,7 @@ const PeoplesName = (props) => {
 
     if (props.peoplesData != undefined){
         peopleList = props.peoplesData.map( item => {
-            return <div className="peoplename" key={item.name}>{item.name}</div>;
+            return <div className="peoplename" key={item.name} onClick={props.toggle}>{item.name}</div>;
         });
     }else{
         peopleList = <div >lodding ...</div>;

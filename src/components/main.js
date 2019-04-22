@@ -3,6 +3,7 @@ import {  } from "reactstrap";
 import { connect } from 'react-redux';
 import { fetchPeople } from '../actions/PeopleActon';
 import PeoplesName from "../containers/PeoplesName";
+import ModalPopup from '../containers/ModalPopup';
 
 
 class Main extends Component{
@@ -31,7 +32,9 @@ class Main extends Component{
         this.setState(prevState => ({
           modal: !prevState.modal
         }));
-      }
+    }
+
+
 
 
 
@@ -39,12 +42,17 @@ class Main extends Component{
         const { error, peoples } = this.props
         
         return(
-            <main role="main" className="main">
+            <main role="main" className="container">
                 <div className="content">
-                    <PeoplesName  peoplesData={peoples.results}/>
+                    <PeoplesName  peoplesData={peoples.results} popupModal={modal => { this.setState(prevState => ({
+          modal: !prevState.modal
+        }))} } />
                 </div>
                 <button className="previousBtn" > {"<< Previous"}</button>
                 <button className="nextBtn"> {"Next >>"} </button>
+                <ModalPopup  popupModal={modal => { this.setState(prevState => ({
+          modal: !prevState.modal
+        }))}} modal={this.state.modal}/>
             </main>
         
         )
