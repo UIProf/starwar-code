@@ -1,0 +1,17 @@
+.header{
+    background-color: #0088ff;
+    width: 100%;
+    line-height: 40px;
+    .container-fluid{
+        .navbar-light{
+            .navbar-toggler{
+                color: rgba(0,0,0,0) !important;
+                border-color: rgba(0,0,0,0) !important;
+            }
+            i{
+                color: #FFF;
+            }
+
+        } 
+    }
+}
