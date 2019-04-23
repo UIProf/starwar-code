@@ -1,23 +1,24 @@
-import React from 'react';
+import React from "react";
 
+const PeopleList = props => {
+  let peopleList;
 
-const PeoplesName = (props) => {
+  if (props.peoplesData != undefined) {
+    peopleList = props.peoplesData.map(item => {
+      return (
+        <div
+          className="peoplename"
+          key={item.name}
+          onClick={() => props.onSelectedPeople(item)}
+        >
+          {item.name}
+        </div>
+      );
+    });
+  } else {
+    peopleList = <div>lodding ...</div>;
+  }
+  return <div className="content">{peopleList}</div>;
+};
 
-    let peopleList ;
-
-    if (props.peoplesData != undefined){
-        peopleList = props.peoplesData.map( item => {
-            return <div className="peoplename" key={item.name} onClick={props.toggle}>{item.name}</div>;
-        });
-    }else{
-        peopleList = <div >lodding ...</div>;
-    }
-
-    return(
-        <React.Fragment>
-           {peopleList}
-        </React.Fragment>
-    )
-}
-
-export default PeoplesName;
+export default PeopleList;
