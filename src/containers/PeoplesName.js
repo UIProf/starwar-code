@@ -2,7 +2,7 @@ import React from "react";
 
 const PeopleList = props => {
   let peopleList;
-
+  
   if (props.peoplesData != undefined) {
     peopleList = props.peoplesData.map(item => {
       return (

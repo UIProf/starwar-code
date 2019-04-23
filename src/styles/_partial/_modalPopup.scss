@@ -1,0 +1,93 @@
+.modal-dialog{
+    max-width: 700px !important;
+
+    .modal-content{
+        border-radius: 2.5px !important;
+        background-color: #ffffff !important;
+        border: solid 0.5px #dce2e7 !important;
+        .modal-header{
+            border: none !important;
+
+            .modal-title{
+                width: 60%;
+                text-align: right;
+                font-family: Graphik;
+                font-size: 20px;
+                font-weight: 300;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 1;
+                color: #2d3a4b;
+            }
+
+            .close{
+                opacity: 0.5;
+                width: 15px;
+                height: 15px;
+                border:  solid 1px #a2b9c4;
+                border-radius: 20px;
+                margin: 0;
+
+                span{
+                    position: relative;
+                    top:-15px;
+                    right: 8px;
+                    opacity: inherit;
+                }
+
+            }
+        }
+
+        .modal-body{
+            padding: 2rem 5rem  0.5rem !important;
+            
+            ul.peopleDetail{
+                margin: 0;
+                padding: 0;
+                list-style: none;
+
+                li{
+                    padding: 5px 10px;
+                    line-height: 20px;
+
+                    span{
+                        font-weight: bold;
+                        display: inline-block;
+                        width: 110px;
+                    }
+                }
+            }
+        }
+        .modal-footer{
+            border: none !important;
+
+            .add{
+                border-radius: 15px;
+                background-color: #ffffff !important;
+                border: solid 0.5px #c8d5db !important;
+                font-family: Graphik;
+                font-size: 12px;
+                font-weight: 600;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 1;
+                letter-spacing: normal;
+                text-align: center;
+                color: #7b8e98;
+                padding: 10px 30px;
+
+                &:hover{
+                    background-color:#42b4ee !important;
+                    color: #ffffff !important;
+                    border: solid 0.5px #42b4ee !important;
+                }
+            }
+        }
+    }
+}
+.modal-backdrop{
+    &.show{
+        opacity: 0.2 !important;
+    }
+}
+

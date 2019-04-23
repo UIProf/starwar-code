@@ -1,47 +1,41 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchPeople } from '../actions/PeopleActon';
-import PeoplesName from "../containers/PeoplesName";
-import ModalPopup from '../containers/ModalPopup';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchPeople } from "../actions/PeopleActon";
+import PeopleName from "../containers/PeoplesName";
+import ModalPopup from "../containers/ModalPopup";
 
+class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modal: false,
+      selectedPeople: ""
+    };
 
-class Main extends Component{
-    
-    constructor(props){
-        super(props);
+    this._nextAndPriviousButton = this._nextAndPriviousButton.bind(this);
+    this._openModal = this._openModal.bind(this);
+  }
 
-        this.state = {
-            modal: false,
-           selectedPeople: ""
-        }
+  componentDidMount() {
+    this.props.dispatch(fetchPeople());
+  }
 
-        this._nextAndPriviousButton = this._nextAndPriviousButton.bind(this);
-        this._openModal = this._openModal.bind(this);
+  _nextAndPriviousButton(URL) {
+    this.props.dispatch(fetchPeople(URL));
+  }
 
-    }
-    componentWillMount(){
-        this.props.dispatch(fetchPeople());
-    }
+  _openModal() {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
+  }
 
-    _nextAndPriviousButton(URL){
-        this.props.dispatch(fetchPeople(URL));
-    }
+  render() {
+    const { error, peoples } = this.props;
 
-    _openModal() {
-        this.setState(prevState => ({
-          modal: !prevState.modal
-        }));
-    }
-
-
-    render(){
-        const { error, peoples } = this.props
-        console.log("modal : ", this.state.modal);
-    console.log("p0 data; ", this.state.selectedPeople);
-        
-        return(
-            <main role="main" className="container">
-                <PeopleName
+    return (
+      <div className="main">
+        <PeopleName
           peoplesData={peoples["results"]}
           onSelectedPeople={selectedPeople =>
             this.setState(prevState => ({
@@ -50,22 +44,21 @@ class Main extends Component{
             }))
           }
         />
-         <button
-          disabled={peoples.previous != null ? "" : "disabled"}
-          className="previousBtn"
-          onClick={() => this._nextAndPriviousButton(peoples.previous)}
-        >
-          {" "}
-          {"<< Previous"}
-        </button>
-        <button
-          disabled={peoples.next != null ? "" : "disabled"}
-          className="nextBtn"
-          onClick={() => this._nextAndPriviousButton(peoples.next)}
-        >
-          {" "}
-          {"Next >>"}{" "}
-        </button>
+        <div className="Buttons">
+          <button
+            disabled={peoples.previous != null ? "" : "disabled"}
+            className="previousBtn"
+            onClick={() => this._nextAndPriviousButton(peoples.previous)}
+          >
+            {"<< Previous"}
+          </button>
+          <button
+            className="nextBtn"
+            onClick={() => this._nextAndPriviousButton(peoples.next)}
+          >
+            {"Next >>"}
+          </button>
+        </div>
         <ModalPopup
           popupModal={modal => {
             this.setState(prevState => ({
@@ -73,18 +66,18 @@ class Main extends Component{
             }));
           }}
           modal={this.state.modal}
+          selectedPeople={this.state.selectedPeople}
         />
-            </main>
-        
-        )
-    }
-
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = state => {
-    return {
-        peoples: state.peoples.peoples,
-        error: state.peoples.error
-    };
-}
+  return {
+    peoples: state.peoples.peoples,
+    error: state.peoples.error
+  };
+};
+
 export default connect(mapStateToProps)(Main);

@@ -2,8 +2,9 @@
 @import "_variables/colors";
 @import "_variables/font";
 @import "_variables/sizes";
-@import 'app';
-@import "header";
+@import "_partial/app";
+@import "_partial/header";
+@import "_partial/modalPopup";
 
 .content{
     margin: 0;
