@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {  } from "reactstrap";
 import { connect } from 'react-redux';
 import { fetchPeople } from '../actions/PeopleActon';
 import PeoplesName from "../containers/PeoplesName";
@@ -13,7 +12,7 @@ class Main extends Component{
 
         this.state = {
             modal: false,
-            peopleDetail: ""
+           selectedPeople: ""
         }
 
         this._nextAndPriviousButton = this._nextAndPriviousButton.bind(this);
@@ -40,19 +39,30 @@ class Main extends Component{
 
     render(){
         const { error, peoples } = this.props
+        console.log("modal : ", this.state.modal);
+    console.log("p0 data; ", this.state.selectedPeople);
         
         return(
             <main role="main" className="container">
-                <div className="content">
-                    <PeoplesName  peoplesData={peoples.results} popupModal={modal => { this.setState(prevState => ({
-          modal: !prevState.modal
-        }))} } />
-                </div>
-                <button className="previousBtn" > {"<< Previous"}</button>
-                <button className="nextBtn"> {"Next >>"} </button>
-                <ModalPopup  popupModal={modal => { this.setState(prevState => ({
-          modal: !prevState.modal
-        }))}} modal={this.state.modal}/>
+                <PeopleName
+          peoplesData={peoples["results"]}
+          onSelectedPeople={selectedPeople =>
+            this.setState(prevState => ({
+              selectedPeople: selectedPeople,
+              modal: !prevState.modal
+            }))
+          }
+        />
+        <button className="previousBtn"> {"<< Previous"}</button>
+        <button className="nextBtn"> {"Next >>"} </button>
+        <ModalPopup
+          popupModal={modal => {
+            this.setState(prevState => ({
+              modal: !prevState.modal
+            }));
+          }}
+          modal={this.state.modal}
+        />
             </main>
         
         )
