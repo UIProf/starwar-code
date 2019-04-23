@@ -1,6 +1,8 @@
 Setup
-npm install
-Running
+
+
+run npm install
+
 
 
 npm start - run the development server
