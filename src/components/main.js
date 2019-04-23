@@ -34,9 +34,6 @@ class Main extends Component{
     }
 
 
-
-
-
     render(){
         const { error, peoples } = this.props
         console.log("modal : ", this.state.modal);
@@ -53,8 +50,22 @@ class Main extends Component{
             }))
           }
         />
-        <button className="previousBtn"> {"<< Previous"}</button>
-        <button className="nextBtn"> {"Next >>"} </button>
+         <button
+          disabled={peoples.previous != null ? "" : "disabled"}
+          className="previousBtn"
+          onClick={() => this._nextAndPriviousButton(peoples.previous)}
+        >
+          {" "}
+          {"<< Previous"}
+        </button>
+        <button
+          disabled={peoples.next != null ? "" : "disabled"}
+          className="nextBtn"
+          onClick={() => this._nextAndPriviousButton(peoples.next)}
+        >
+          {" "}
+          {"Next >>"}{" "}
+        </button>
         <ModalPopup
           popupModal={modal => {
             this.setState(prevState => ({
